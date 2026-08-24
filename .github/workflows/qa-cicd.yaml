@@ -5,7 +5,7 @@ on:
     branches:
       - qa
     paths:
-      - github/workflows/qa-cicd.yaml
+      - .github/workflows/qa-cicd.yaml
     
 jobs:
   gitleaksScan:
