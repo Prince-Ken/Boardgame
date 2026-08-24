@@ -6,6 +6,11 @@ on:
       - qa
     paths:
       - .github/workflows/qa-cicd.yaml
+      - Dockerfile
+      - src/**
+
+  permissions:
+    contents: read
     
 jobs:
   gitleaksScan:
