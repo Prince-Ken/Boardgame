@@ -1,0 +1,40 @@
+name: practice workflow
+
+on:
+  push:
+    branches:
+      - qa
+    paths:
+      - github/workflows/qa-cicd.yaml
+    
+jobs:
+  gitleaksScan:
+    name: scan for secrets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code 
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run gitleaks scan
+        uses: zricethezav/gitleaks-action@v2.8.0
+        with:
+          args: "--verbose --redact" 
+
+  checkov:
+    name: checkov scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code 
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run checkov scan
+        uses: bridgecrewio/checkov-action@v12.0.0
+        with:
+          directory: .
+          quiet: true
