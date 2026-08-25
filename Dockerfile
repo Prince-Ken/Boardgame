@@ -27,7 +27,7 @@ WORKDIR /app
 # Copy built jar from build stage
 COPY --from=build /app/target/*.jar app.jar
 
-RUN chown -R appuser:appuser /app
+RUN chown -R appuser:appgroup /app
 
 
 USER appuser
