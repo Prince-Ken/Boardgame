@@ -17,7 +17,10 @@ RUN mvn clean package -DskipTests
 # ===== Runtime Stage =====
 FROM eclipse-temurin:17-jre-alpine
 
-RUN useradd -r -u 1001 appuser
+# Create non-root user
+RUN addgroup -S appgroup && adduser -S -u 1001 -G appgroup appuser
+
+
 
 WORKDIR /app
 
