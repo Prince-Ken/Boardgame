@@ -1,0 +1,36 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: boardgame-deployer
+  namespace: boardgame-qa
+rules:
+  # Allow GitHub Actions to manage the Boardgame deployment
+  - apiGroups: ["apps"]
+    resources:
+      - deployments
+      - deployments/status
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+      - patch
+      - update
+
+  # Allow GitHub Actions to inspect Pods
+  - apiGroups: [""]
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+
+  # Allow GitHub Actions to inspect the service
+  - apiGroups: [""]
+    resources:
+      - services
+    verbs:
+      - get
+      - list
+      - watch
